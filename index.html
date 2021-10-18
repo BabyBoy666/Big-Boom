@@ -3,11 +3,35 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <title>kajam</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.16.2/phaser.min.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="./scenes/scene1.js"></script>
   </head>
   <body>
-    Hello world
-    <script src="script.js"></script>
+    <h3>game</h3>
+    <script>
+      const phaserConfig = {
+          type: Phaser.AUTO,
+          scale: {
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+            mode: Phaser.Scale.FIT,
+            parent: "app",
+            width: 2100,
+            height: 1200
+          },
+
+          backgroundColor: "#FFFFF",
+          physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 300 },
+                debug: false
+            }
+          },
+          scene: [TitleScene,]
+      };
+      const game = new Phaser.Game(phaserConfig);
+    </script>
   </body>
 </html>
