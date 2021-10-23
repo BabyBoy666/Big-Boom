@@ -1,5 +1,7 @@
 var TitleScene = new Phaser.Class(function(){
     var xplode = false
+    var cont = false
+    var next = true
     return {
       Extends: Phaser.Scene,
       initialize: function() {
@@ -94,18 +96,24 @@ var TitleScene = new Phaser.Class(function(){
                   callback: () => {
                     bombs.body.setAllowGravity(true)
                     this.time.addEvent({
-                      delay: 3500,
+                      delay: 3600,
                       loop: false,
                       callback: () => {
                         var camera = this.cameras.main;
                         camera.flash(7000);
                         camera.shake(750, 0.05)
                         this.time.addEvent({
-                          delay: 200,
+                          delay: 100,
                           loop: false,
                           callback: () => {
                             bombs.anims.play("explosion", true)
                             bground.destroy()
+                            cont = true
+                            this.input.on('pointerdown', function() {
+                              if (cont == true){
+                                next = true
+                              }
+                            });
                           }
                         }, this);
                       }
@@ -118,6 +126,9 @@ var TitleScene = new Phaser.Class(function(){
         }, this);
       },
       update: function() {
-        
+        if (next == true){
+          this.scene.start("Game")
+          this.scene.stop()
+        }
       }
 }}());
